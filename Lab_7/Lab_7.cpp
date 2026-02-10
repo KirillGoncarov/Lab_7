@@ -1,10 +1,14 @@
-﻿// Lab_7.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+﻿#include <cmath>  
 #include <iostream>
 
-int main()
-{
-    std::cout << "Hello World!\n";
+using namespace std;
+
+int main(){
+    setlocale(LC_ALL, "Russian");
+    //II.1.	ВЫЧИСЛЕНИЕ ЗНАЧЕНИЙ ФУНКЦИИ. 
+    double step;
+
+    step = 4.0/10.0;
+    cout << step;
 }
 
