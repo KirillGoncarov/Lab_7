@@ -4,8 +4,16 @@
 
 
 using namespace std;
-
 #define Dl 10
+
+//Структура двусвязного списка
+struct Dubl_list {
+    int value;
+    Dubl_list* prev;
+    Dubl_list* next;
+
+    Dubl_list(int val) : value(val), prev(nullptr), next(nullptr) {}
+};
 
 
 void bubbleSort(int* arr, int n);
@@ -16,12 +24,12 @@ int main() {
 
 
     cout << "Выберите вариант заполнения массива" << endl;
-    cout << "1.статический массив, индексная адресация;" << endl;
-    cout << "2.статический массив, адресация с помощью указателя" << endl;
-    cout << "3.динамический массив, индексная адресация;" << endl;
-    cout << "4.динамический массив, адресация с помощью указателя " << endl;
+    cout << "1.Статический массив, индексная адресация;" << endl;
+    cout << "2.Статический массив, адресация с помощью указателя" << endl;
+    cout << "3.Динамический массив, индексная адресация;" << endl;
+    cout << "4.Динамический массив, адресация с помощью указателя " << endl;
     cout << "5.Объединение двух упорядоченных по возрастанию массивов" << endl;
-
+    cout << "6.Программа создания двусвязного самоадресуемого списка" << endl;
 
     int num;
     cin >> num;
@@ -129,36 +137,84 @@ int main() {
         uk = mas_2;
 
         n = 0; i = 0; j = 0;
+
+
         while (i < dl_1 && j < dl_2) {
-            if (mas_1[i] < *uk) {
-                all_mas[n++] = mas_1[i++];
+            if (mas_1[i] <= *uk) {
+
+                if (mas_1[i] < *uk) {
+                    all_mas[n++] = mas_1[i++];
+                }
+                else {
+                    all_mas[n++] = mas_1[i++];
+                    all_mas[n++] = *uk;
+                    uk++;
+                    j++;
+                }
             }
             else {
                 all_mas[n++] = *uk;
+                uk++;
+                j++;
             }
-            uk++;
-            j++;
         }
+
         while (i < dl_1) {
             all_mas[n++] = mas_1[i++];
         }
 
         while (j < dl_2) {
-            all_mas[n++] = mas_2[i++];
+            all_mas[n++] = *uk;
+            j++;
+            uk++;
         }
+
+        cout << "\n" << endl;
+
 
         for (int i = 0; i < dl_mas; i++) {
             cout << all_mas[i] << " ";
         }
-        cout << endl;
 
+        cout << "\n" << endl;
+        cout << i << endl;
+        cout << j << endl;
 
 
         delete[] mas_1; delete[] mas_2; delete[] all_mas;
     }
+    else {
+        cout << "Двусвязный список" << endl;
+
+        Dubl_list* head = new Dubl_list(1);
+        Dubl_list* current = head;
+
+        for (int i = 0; i <= 10; i++) {
+            Dubl_list* newVal = new Dubl_list(i);
+
+            current->next = newVal;
+            newVal->prev = current;
+
+            current = newVal;
+        }
+
+        Dubl_list* tail = current;
+
+        //Вывод списка
+        current = head;
+        while (current != nullptr) {
+            cout << current->value << " ";
+
+            current = current->next;
+        }
+    }
+
 
     return 0;
 }
+
+
+
 
 
 
